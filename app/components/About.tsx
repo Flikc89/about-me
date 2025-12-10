@@ -10,11 +10,11 @@ const STATS = [
 export default function About() {
   return (
     <section id='about' className={styles.section}>
-      <h2 className='section-heading'>About me</h2>
+      <h2 className={`section-heading ${styles.heading}`}>About me</h2>
       <div className={`text-body text-white ${styles.description}`}>
         Я создаю интерфейсы, которые работают быстрее, выглядят лучше и решают
-        настоящие задачи людей. Для меня важно, чтобы пользователь чувствовал себя
-        уверенно и спокойно.
+        настоящие задачи людей. Для меня важно, чтобы пользователь чувствовал
+        себя уверенно и спокойно.
       </div>
       <div className={`flex ${styles.statsContainer}`}>
         {STATS.map((stat, index) => {

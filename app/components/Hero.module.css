@@ -1,7 +1,7 @@
 .background {
   left: 50%;
   transform: translateX(-50%);
-  width: 1208px;
+  width: var(--max-width);
   height: 697px;
   background-image: url(/bg-hero.svg);
   background-size: cover;
@@ -11,7 +11,7 @@
 }
 
 .contentContainer {
-  width: 1208px;
+  width: var(--max-width);
   height: 697px;
   justify-content: space-between;
 }
@@ -41,4 +41,3 @@
   left: 50%;
   transform: translateX(-50%);
 }
-

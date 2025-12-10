@@ -13,10 +13,10 @@ export default function Home() {
       <main
         style={{
           width: '100%',
-          maxWidth: '1208px',
+          maxWidth: 'var(--max-width)',
           marginLeft: 'auto',
           marginRight: 'auto',
-          paddingTop: '96px',
+          paddingTop: '108px',
           paddingBottom: '64px',
         }}
       >

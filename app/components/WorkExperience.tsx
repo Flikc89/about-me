@@ -83,15 +83,13 @@ export default function WorkExperience() {
 
   const toggleItem = (index: number) => {
     setOpenIndexes((prev) =>
-      prev.includes(index)
-        ? prev.filter((i) => i !== index)
-        : [...prev, index]
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
 
   return (
     <section id='experience' className={styles.section}>
-      <h2 className='section-heading'>work experience</h2>
+      <h2 className={`section-heading ${styles.heading}`}>work experience</h2>
       <div className={styles.listContainer}>
         {EXPERIENCES.map((exp, index) => (
           <div
@@ -107,11 +105,7 @@ export default function WorkExperience() {
                   openIndexes.includes(index) ? styles.iconContainerRotated : ''
                 }`}
               >
-                <img
-                  src='/devider.svg'
-                  alt='Divider'
-                  className={styles.icon}
-                />
+                <img src='/devider.svg' alt='Divider' className={styles.icon} />
               </div>
               <div className={styles.titleContainer}>
                 <div className={`experience-title ${styles.titleRow}`}>
@@ -127,18 +121,25 @@ export default function WorkExperience() {
               </div>
             </div>
             {openIndexes.includes(index) && exp.description && (
-              <div className={`experience-description text-white ${styles.descriptionContainer}`}>
+              <div
+                className={`experience-description text-white ${styles.descriptionContainer}`}
+              >
                 {Array.isArray(exp.description) ? (
                   <ul className={styles.descriptionList}>
                     {exp.description.map((item, itemIndex) => (
-                      <li key={itemIndex} className={styles.descriptionListItem}>
+                      <li
+                        key={itemIndex}
+                        className={styles.descriptionListItem}
+                      >
                         <span className={styles.bullet} />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <div className={styles.descriptionText}>{exp.description}</div>
+                  <div className={styles.descriptionText}>
+                    {exp.description}
+                  </div>
                 )}
               </div>
             )}

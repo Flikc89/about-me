@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import styles from './MySkills.module.css';
 
 const SKILLS = [
@@ -64,13 +67,32 @@ const SKILLS = [
 const ROW_CONFIG = [10, 7, 4, 7, 6, 6, 1];
 
 export default function MySkills() {
-  const skillsRows: string[][] = [];
-  let currentIndex = 0;
+  const [isMobile, setIsMobile] = useState(false);
 
-  ROW_CONFIG.forEach((count) => {
-    skillsRows.push(SKILLS.slice(currentIndex, currentIndex + count));
-    currentIndex += count;
-  });
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const skillsRows: string[][] = [];
+  
+  if (isMobile) {
+    // На мобильных просто одна строка со всеми навыками
+    skillsRows.push(SKILLS);
+  } else {
+    // На десктопе используем ROW_CONFIG
+    let currentIndex = 0;
+    ROW_CONFIG.forEach((count) => {
+      skillsRows.push(SKILLS.slice(currentIndex, currentIndex + count));
+      currentIndex += count;
+    });
+  }
 
   return (
     <section id='skills' className={styles.section}>

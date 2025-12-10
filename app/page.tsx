@@ -5,22 +5,14 @@ import WorkExperience from './components/WorkExperience';
 import MySkills from './components/MySkills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import styles from './page.module.css';
 
 export default function Home() {
   return (
     <div className='min-h-screen bg-dark'>
       <Navigation />
 
-      <main
-        style={{
-          width: '100%',
-          maxWidth: 'var(--max-width)',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          paddingTop: '108px',
-          paddingBottom: '64px',
-        }}
-      >
+      <main className={styles.main}>
         <Hero />
         <About />
         <WorkExperience />

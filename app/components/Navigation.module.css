@@ -5,8 +5,92 @@
   padding-top: 12px;
 }
 
+.navContainer {
+  width: 100%;
+}
+
+.desktopNav {
+  display: none;
+}
+
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 50;
+}
+
+.mobileMenuIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.mobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 45;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background-color: rgba(38, 35, 35, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenuItem {
+  color: var(--color-gray);
+  text-decoration: none;
+  font-size: 16px;
+  padding: 12px 0;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobileMenuItem:last-child {
+  border-bottom: none;
+}
+
+.mobileMenuItem:hover {
+  color: white;
+}
+
 @media (max-width: 768px) {
   .header {
     padding-top: 8px;
+  }
+
+  .desktopNav {
+    display: none !important;
+  }
+
+  .mobileMenuButton {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktopNav {
+    display: flex !important;
+  }
+
+  .mobileMenuButton {
+    display: none !important;
   }
 }

@@ -53,11 +53,14 @@
   }
 
   .skillsContainer {
-    padding: 0 16px;
+    padding: 0;
+    gap: 12px;
   }
 
   .skillsRow {
-    justify-content: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
   }
 
   .skillBlock {

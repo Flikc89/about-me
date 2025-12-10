@@ -63,3 +63,25 @@
   text-align: center;
   margin-top: 4px;
 }
+
+@media (max-width: 768px) {
+  .section {
+    margin-top: 60px;
+  }
+
+  .description {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  .statsContainer {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px;
+  }
+
+  .statCard {
+    width: 100%;
+    max-width: 290px;
+  }
+}

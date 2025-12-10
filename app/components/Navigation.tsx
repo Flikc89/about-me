@@ -3,7 +3,10 @@
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
@@ -19,14 +22,16 @@ export default function Navigation() {
   };
 
   return (
-    <header className={`fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 px-4 ${styles.header}`}>
+    <header
+      className={`fixed top-0 left-1/2 z-40 w-full -translate-x-1/2 px-4 ${styles.header}`}
+    >
       <div
         className='mx-auto flex h-12 items-center justify-between'
         style={{ maxWidth: 'var(--max-width)' }}
       >
         {/* Имя слева */}
         <div
-          className='text-body font-bold uppercase tracking-[0.16em]'
+          className='text-body font-bold uppercase tracking-[0.16em] text-xs md:text-base'
           style={{ color: 'var(--color-gray)' }}
         >
           Denis Lobanov
@@ -34,7 +39,7 @@ export default function Navigation() {
 
         {/* Навигация справа */}
         <nav
-          className='text-body flex items-center gap-10 font-normal uppercase tracking-[0.16em]'
+          className='text-body flex items-center gap-4 md:gap-10 font-normal uppercase tracking-[0.16em] text-xs md:text-base'
           style={{ color: 'var(--color-gray)' }}
         >
           <a

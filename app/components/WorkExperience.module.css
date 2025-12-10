@@ -109,3 +109,33 @@
 .descriptionText {
   white-space: pre-line;
 }
+
+@media (max-width: 768px) {
+  .section {
+    margin-top: 60px;
+  }
+
+  .header {
+    padding: 0 12px;
+    flex-wrap: wrap;
+  }
+
+  .titleRow {
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  .icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .number {
+    font-size: 16px;
+    margin-left: 8px;
+  }
+
+  .descriptionContainer {
+    padding: 0 12px 12px 40px;
+  }
+}

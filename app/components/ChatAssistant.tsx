@@ -1,5 +1,7 @@
 'use client';
 
+import styles from './ChatAssistant.module.css';
+
 const SUGGESTED_QUESTIONS = [
   'Стек технологий',
   'Что делал на последнем месте работы?',
@@ -17,14 +19,10 @@ export default function ChatAssistant() {
   };
 
   return (
-    <div style={{ width: '800px' }}>
+    <div className={styles.container}>
       <div
-        className='cursor-pointer'
+        className={`cursor-pointer ${styles.inputContainer}`}
         onClick={() => handleClick()}
-        style={{
-          width: '800px',
-          height: '56px',
-        }}
       >
         <img
           src='/ask-me.svg'
@@ -34,17 +32,12 @@ export default function ChatAssistant() {
       </div>
 
       {/* Suggested questions blocks */}
-      <div className='flex gap-3 mt-4'>
+      <div className={`flex gap-3 mt-4 ${styles.questionsContainer}`}>
         {SUGGESTED_QUESTIONS.map((question, index) => (
           <div
             key={index}
-            className='text-body text-white cursor-pointer'
+            className={`text-body text-white cursor-pointer ${styles.questionBlock}`}
             onClick={() => handleClick(question)}
-            style={{
-              backgroundColor: 'var(--color-dark-purple)',
-              padding: '4px 8px',
-              borderRadius: '8px',
-            }}
           >
             {question}
           </div>

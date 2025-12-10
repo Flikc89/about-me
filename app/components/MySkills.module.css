@@ -46,3 +46,26 @@
   line-height: 24px;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .section {
+    margin-top: 60px;
+  }
+
+  .skillsContainer {
+    padding: 0 16px;
+  }
+
+  .skillsRow {
+    justify-content: flex-start;
+  }
+
+  .skillBlock {
+    height: 36px;
+  }
+
+  .skillText {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

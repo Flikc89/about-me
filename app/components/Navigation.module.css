@@ -2,6 +2,11 @@
   background-color: rgba(38, 35, 35, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding-top: 24px;
+  padding-top: 12px;
 }
 
+@media (max-width: 768px) {
+  .header {
+    padding-top: 8px;
+  }
+}

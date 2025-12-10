@@ -12,3 +12,13 @@
   color: var(--color-gray);
 }
 
+@media (max-width: 768px) {
+  .footer {
+    padding: 24px 0;
+  }
+
+  .footerContent {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

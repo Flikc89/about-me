@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #262323;
@@ -10,17 +10,17 @@
   --color-foreground: var(--foreground);
   --font-pixeloid: var(--font-pixeloid-sans);
   --font-hack: var(--font-hack);
-  
+
   /* Color Palette - доступны как bg-dark, text-purple и т.д. */
   --color-dark: #262323;
   --color-white: #ffffff;
-  --color-light-gray: #D7D9E0;
-  --color-purple: #AA56A8;
+  --color-light-gray: #d7d9e0;
+  --color-purple: #aa56a8;
   --color-purple-dark: #964294;
-  --color-dark-purple: #4E324B;
-  --color-pink: #D32F73;
-  --color-green: #00A67D;
-  --color-red: #DF2B4A;
+  --color-dark-purple: #4e324b;
+  --color-pink: #d32f73;
+  --color-green: #00a67d;
+  --color-red: #df2b4a;
 }
 
 @media (prefers-color-scheme: dark) {

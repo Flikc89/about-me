@@ -46,6 +46,17 @@ body {
   text-transform: uppercase;
 }
 
+/* Заголовки секций - Pixeloid Sans */
+.section-heading {
+  font-family: var(--font-pixeloid-sans), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 /* Обычный текст - Hack */
 .text-body {
   font-family: var(--font-hack), monospace;

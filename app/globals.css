@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 :root {
   --background: #262323;
@@ -10,17 +10,17 @@
   --color-foreground: var(--foreground);
   --font-pixeloid: var(--font-pixeloid-sans);
   --font-hack: var(--font-hack);
-
+  
   /* Color Palette - доступны как bg-dark, text-purple и т.д. */
   --color-dark: #262323;
   --color-white: #ffffff;
-  --color-light-gray: #d7d9e0;
-  --color-purple: #aa56a8;
+  --color-light-gray: #D7D9E0;
+  --color-purple: #AA56A8;
   --color-purple-dark: #964294;
-  --color-dark-purple: #4e324b;
-  --color-pink: #d32f73;
-  --color-green: #00a67d;
-  --color-red: #df2b4a;
+  --color-dark-purple: #4E324B;
+  --color-pink: #D32F73;
+  --color-green: #00A67D;
+  --color-red: #DF2B4A;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -67,7 +67,7 @@ body {
   text-align: center;
 }
 
-/* Заголовки у карточек - Hack Bold (цвет pink применяется через класс) */
+/* Заголовки у карточек - Hack Bold */
 .card-heading {
   font-family: var(--font-hack), monospace;
   font-weight: 700;
@@ -85,11 +85,4 @@ body {
   line-height: 44px;
   letter-spacing: 0%;
   text-transform: uppercase;
-}
-
-/* Блоки вопросов для чата */
-.question-block {
-  background-color: var(--color-dark-purple);
-  padding: 4px 8px;
-  border-radius: 8px;
 }

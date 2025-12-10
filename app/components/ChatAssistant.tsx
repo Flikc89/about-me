@@ -38,8 +38,13 @@ export default function ChatAssistant() {
         {SUGGESTED_QUESTIONS.map((question, index) => (
           <div
             key={index}
-            className='text-body text-white cursor-pointer question-block'
+            className='text-body text-white cursor-pointer'
             onClick={() => handleClick(question)}
+            style={{
+              backgroundColor: 'var(--color-dark-purple)',
+              padding: '4px 8px',
+              borderRadius: '8px',
+            }}
           >
             {question}
           </div>

@@ -40,9 +40,7 @@ export const metadata: Metadata = {
   title: 'Denis Lobanov',
   description: 'Senior Frontend Developer',
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: '/favicon.svg',
   },
 };
 

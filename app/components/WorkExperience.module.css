@@ -1,0 +1,108 @@
+.section {
+  margin-top: 120px;
+}
+
+.listContainer {
+  margin-top: 40px;
+}
+
+.experienceItem {
+  background-color: #302d2d;
+  color: white;
+  cursor: pointer;
+  min-height: 48px;
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+  overflow: hidden;
+}
+
+.experienceItem:hover {
+  background-color: #4e324b;
+}
+
+.itemSpacing {
+  margin-bottom: 12px;
+}
+
+.itemSpacing:last-child {
+  margin-bottom: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 20px;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.iconContainerRotated {
+  transform: rotate(90deg);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.titleContainer {
+  flex: 1;
+}
+
+.titleRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.commitText {
+  color: var(--color-purple);
+}
+
+.number {
+  color: var(--color-purple);
+  font-size: 18px;
+  margin-left: 16px;
+}
+
+.descriptionContainer {
+  padding: 0 20px 16px 30px;
+}
+
+.descriptionList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.descriptionListItem {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.descriptionListItem:last-child {
+  margin-bottom: 0;
+}
+
+.bullet {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-purple);
+  margin-top: 9px;
+  flex-shrink: 0;
+}
+
+.descriptionText {
+  white-space: pre-line;
+}
+

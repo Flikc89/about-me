@@ -10,14 +10,21 @@ export default function Home() {
     <div className='min-h-screen bg-dark'>
       <Navigation />
 
-      <main className='container mx-auto px-4 pt-24 pb-16 md:px-6 lg:px-8'>
+      <main
+        style={{
+          width: '100%',
+          maxWidth: '1208px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingTop: '96px',
+          paddingBottom: '64px',
+        }}
+      >
         <Hero />
-        <div className='mx-auto max-w-4xl'>
-          <About />
-          <WorkExperience />
-          <MySkills />
-          <Contact />
-        </div>
+        <About />
+        <WorkExperience />
+        <MySkills />
+        <Contact />
       </main>
     </div>
   );

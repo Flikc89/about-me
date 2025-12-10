@@ -1,0 +1,44 @@
+.background {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1208px;
+  height: 697px;
+  background-image: url(/bg-hero.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.contentContainer {
+  width: 1208px;
+  height: 697px;
+  justify-content: space-between;
+}
+
+.frontendBlock {
+  margin-top: 200px;
+}
+
+.developerBlock {
+  margin-top: 350px;
+}
+
+.headingPurple {
+  color: var(--color-purple);
+}
+
+.photoContainer {
+  width: 417px;
+  height: 532px;
+  top: 36px;
+  left: 396px;
+  opacity: 1;
+}
+
+.chatAssistantContainer {
+  top: 568px; /* 36px (photo top) + 532px (photo height) */
+  left: 50%;
+  transform: translateX(-50%);
+}
+

@@ -1,0 +1,15 @@
+.container {
+  width: 800px;
+}
+
+.inputContainer {
+  width: 800px;
+  height: 56px;
+}
+
+.questionBlock {
+  background-color: var(--color-dark-purple);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+

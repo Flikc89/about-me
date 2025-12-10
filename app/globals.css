@@ -108,3 +108,14 @@ body {
   line-height: 24px;
   letter-spacing: 0%;
 }
+
+/* Текст футера - Hack */
+.footer-text {
+  font-family: var(--font-hack), monospace;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: right;
+  color: #b2b1b1;
+}

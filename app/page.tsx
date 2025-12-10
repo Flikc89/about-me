@@ -4,6 +4,7 @@ import About from './components/About';
 import WorkExperience from './components/WorkExperience';
 import MySkills from './components/MySkills';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <MySkills />
         <Contact />
       </main>
+      <Footer />
     </div>
   );
 }

@@ -39,9 +39,6 @@ const hack = localFont({
 export const metadata: Metadata = {
   title: 'Denis Lobanov',
   description: 'Senior Frontend Developer',
-  icons: {
-    icon: '/favicon.svg',
-  },
 };
 
 export default function RootLayout({

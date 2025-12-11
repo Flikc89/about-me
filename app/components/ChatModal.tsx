@@ -30,8 +30,57 @@ export default function ChatModal({
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [thinkingMessages, setThinkingMessages] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const thinkingTimeoutRef = useRef<NodeJS.Timeout[]>([]);
   const sessionId = getOrCreateSessionId();
+
+  // Варианты сообщений для имитации мышления
+  const thinkingSteps = [
+    [
+      'Отправляю запрос...',
+      'Обрабатываю вопрос...',
+      'Анализирую контекст...',
+      'Начинаю обработку...',
+      'Получаю запрос...',
+      'Инициализирую анализ...',
+    ],
+    [
+      'Изучаю информацию...',
+      'Проверяю данные...',
+      'Ищу релевантную информацию...',
+      'Анализирую базу знаний...',
+      'Проверяю источники...',
+      'Собираю данные...',
+    ],
+    [
+      'Формирую ответ...',
+      'Структурирую информацию...',
+      'Подготавливаю ответ...',
+      'Составляю ответ...',
+      'Организую информацию...',
+      'Создаю структурированный ответ...',
+    ],
+    [
+      'Почти готово...',
+      'Завершаю обработку...',
+      'Финализирую ответ...',
+      'Завершаю формирование...',
+      'Проверяю ответ...',
+      'Финальная проверка...',
+    ],
+  ];
+
+  // Сообщения для длительного мышления
+  const longThinkingMessages = [
+    'Думаю дольше...',
+    'Глубоко анализирую...',
+    'Изучаю детали...',
+    'Размышляю...',
+  ];
+
+  // Сообщение об ошибке
+  const ERROR_MESSAGE = 'Произошла ошибка при отправке сообщения.';
 
   // Загружаем сохраненные сообщения при открытии модалки
   useEffect(() => {
@@ -40,7 +89,10 @@ export default function ChatModal({
       setMessages(savedMessages);
 
       // Если есть начальное сообщение и его еще нет в сохраненных
-      if (initialMessage && !savedMessages.some((m) => m.text === initialMessage && m.isUser)) {
+      if (
+        initialMessage &&
+        !savedMessages.some((m) => m.text === initialMessage && m.isUser)
+      ) {
         const userMessage: Message = {
           id: Date.now().toString(),
           text: initialMessage,
@@ -53,11 +105,79 @@ export default function ChatModal({
         // Отправляем сообщение агенту
         handleSendToAgent(initialMessage, newMessages);
       }
+
+      // Прокручиваем вниз при открытии модалки
+      setTimeout(() => {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 200);
     } else {
       setInputValue('');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, initialMessage]);
+
+  // Очистка таймеров мышления
+  const clearThinkingTimers = () => {
+    thinkingTimeoutRef.current.forEach((timer) => clearTimeout(timer));
+    thinkingTimeoutRef.current = [];
+    setThinkingMessages([]);
+  };
+
+  // Имитация процесса мышления
+  const startThinking = (onComplete: () => void) => {
+    clearThinkingTimers();
+    setThinkingMessages([]);
+
+    // Показываем первое сообщение сразу
+    const firstStepVariants = thinkingSteps[0];
+    const firstMessage =
+      firstStepVariants[Math.floor(Math.random() * firstStepVariants.length)];
+    setThinkingMessages([firstMessage]);
+
+    // Начинаем с задержки для второго этапа
+    let accumulatedDelay = 1000 + Math.random() * 1000; // 1000-2000ms (1-2 сек)
+
+    // Остальные этапы с задержкой
+    thinkingSteps.slice(1).forEach((stepVariants, stepIndex) => {
+      // Выбираем случайное сообщение из вариантов этапа
+      const randomMessage =
+        stepVariants[Math.floor(Math.random() * stepVariants.length)];
+
+      // Задержка для каждого этапа
+      const delay = 1000 + Math.random() * 1000; // 1000-2000ms на этап (1-2 сек)
+      accumulatedDelay += delay;
+
+      const timer = setTimeout(() => {
+        setThinkingMessages((prev) => {
+          const newMessages = [...prev];
+          // Заменяем предыдущее сообщение текущего этапа
+          if (newMessages.length > stepIndex + 1) {
+            newMessages[stepIndex + 1] = randomMessage;
+          } else {
+            newMessages.push(randomMessage);
+          }
+          return newMessages;
+        });
+
+        // После последнего этапа показываем "Думаю дольше..." и вызываем onComplete
+        if (stepIndex === thinkingSteps.length - 2) {
+          setTimeout(() => {
+            // Показываем сообщение "Думаю дольше..." пока не придет ответ
+            const randomLongMessage =
+              longThinkingMessages[
+                Math.floor(Math.random() * longThinkingMessages.length)
+              ];
+            setThinkingMessages([randomLongMessage]);
+            onComplete();
+          }, 500);
+        }
+      }, accumulatedDelay);
+
+      thinkingTimeoutRef.current.push(timer);
+    });
+  };
 
   // Блокируем скролл страницы при открытой модалке
   useEffect(() => {
@@ -76,24 +196,45 @@ export default function ChatModal({
         document.body.style.width = '';
         document.body.style.overflow = '';
         window.scrollTo(0, scrollY);
+        // Очищаем таймеры при закрытии
+        clearThinkingTimers();
       };
     }
   }, [isOpen]);
 
   // Прокрутка к последнему сообщению
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages]);
+    // Прокручиваем при изменении сообщений или состояния загрузки
+    const timer = setTimeout(() => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [messages, isLoading, thinkingMessages]);
 
   const handleSendToAgent = async (
     messageText: string,
     currentMessages: Message[]
   ) => {
     setIsLoading(true);
+
+    // Запускаем запрос к API сразу (параллельно с этапами мышления)
+    const apiPromise = sendMessage(messageText, sessionId);
+
+    // Запускаем имитацию мышления (работает параллельно с запросом)
+    startThinking(() => {
+      // Эта функция вызывается после завершения этапов
+      // Но мы уже не ждем здесь, так как запрос идет параллельно
+    });
+
     try {
-      const response = await sendMessage(messageText, sessionId);
+      // Ждем ответ от API (может прийти в любой момент)
+      const response = await apiPromise;
+
+      // Как только получили ответ - сразу показываем его
+      clearThinkingTimers(); // Останавливаем этапы мышления
       const agentMessage: Message = {
         id: Date.now().toString(),
         text: response,
@@ -102,16 +243,17 @@ export default function ChatModal({
       const updatedMessages = [...currentMessages, agentMessage];
       setMessages(updatedMessages);
       saveChatMessages(updatedMessages);
+      setIsLoading(false);
     } catch (error) {
+      clearThinkingTimers(); // Останавливаем этапы мышления при ошибке
       const errorMessage: Message = {
         id: Date.now().toString(),
-        text: error instanceof Error ? error.message : 'Произошла ошибка при отправке сообщения.',
+        text: error instanceof Error ? error.message : ERROR_MESSAGE,
         isUser: false,
       };
       const updatedMessages = [...currentMessages, errorMessage];
       setMessages(updatedMessages);
       saveChatMessages(updatedMessages);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -154,16 +296,26 @@ export default function ChatModal({
               Начните диалог, задав вопрос
             </div>
           ) : (
-            messages.map((message) => (
-              <div
-                key={message.id}
-                className={`${styles.message} ${
-                  message.isUser ? styles.messageUser : styles.messageAgent
-                }`}
-              >
-                <div className={styles.messageText}>{message.text}</div>
-              </div>
-            ))
+            <>
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`${styles.message} ${
+                    message.isUser ? styles.messageUser : styles.messageAgent
+                  }`}
+                >
+                  <div className={styles.messageText}>{message.text}</div>
+                </div>
+              ))}
+              {isLoading && thinkingMessages.length > 0 && (
+                <div className={`${styles.message} ${styles.messageAgent}`}>
+                  <div className={styles.messageText}>
+                    {thinkingMessages[thinkingMessages.length - 1]}
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </>
           )}
         </div>
 
@@ -183,4 +335,3 @@ export default function ChatModal({
     </div>
   );
 }
-

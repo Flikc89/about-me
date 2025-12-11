@@ -24,7 +24,6 @@
   padding: 16px 20px;
   display: flex;
   justify-content: flex-end;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .closeButton {
@@ -54,6 +53,17 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-purple) transparent;
+}
+
+/* Кастомный скроллбар */
+.messagesContainer::-webkit-scrollbar {
+  width: 2px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background-color: var(--color-purple);
 }
 
 .emptyState {

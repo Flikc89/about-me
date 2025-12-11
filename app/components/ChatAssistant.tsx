@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styles from './ChatAssistant.module.css';
+import ChatInput from './ChatInput';
+import { useChat } from '../contexts/ChatContext';
 
 const SUGGESTED_QUESTIONS = [
   'Стек технологий',
@@ -11,37 +13,35 @@ const SUGGESTED_QUESTIONS = [
 
 export default function ChatAssistant() {
   const [inputValue, setInputValue] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
+  const { openModal } = useChat();
 
   const handleQuestionClick = (text: string) => {
     setInputValue(text);
-    inputRef.current?.focus();
+  };
+
+  const handleOpenChat = () => {
+    if (inputValue.trim()) {
+      openModal(inputValue);
+    }
+  };
+
+  const handleEnter = () => {
+    if (inputValue.trim()) {
+      openModal(inputValue);
+    }
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputWrapper}>
-        <div className={styles.inputInner}>
-          <img
-            src='/plus.svg'
-            alt='Plus icon'
-            className={styles.inputIconLeft}
-          />
-          <input
-            ref={inputRef}
-            type='text'
-            placeholder='Спроси меня…'
-            className={styles.input}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <img
-            src='/open-chat.svg'
-            alt='Open chat icon'
-            className={styles.inputIconRight}
-          />
-        </div>
-      </div>
+      <ChatInput
+        value={inputValue}
+        onChange={setInputValue}
+        onEnter={handleEnter}
+        onRightIconClick={handleOpenChat}
+        placeholder='Спроси меня…'
+        showLeftIcon={false}
+        showRightIcon={true}
+      />
 
       {/* Suggested questions blocks */}
       <div className={styles.questionsContainer}>

@@ -7,7 +7,6 @@
 - **Next.js 16** (App Router) - React фреймворк
 - **TypeScript** - типизированный JavaScript
 - **Tailwind CSS** - утилитарный CSS фреймворк
-- **shadcn/ui** - компоненты UI
 - **Prettier** - форматирование кода
 - **ESLint** - линтинг кода
 

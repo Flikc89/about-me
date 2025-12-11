@@ -5,21 +5,26 @@ import WorkExperience from './components/WorkExperience';
 import MySkills from './components/MySkills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { ChatProvider } from './contexts/ChatContext';
+import ChatModalWrapper from './components/ChatModalWrapper';
 import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-dark'>
-      <Navigation />
+    <ChatProvider>
+      <div className='min-h-screen bg-dark'>
+        <Navigation />
 
-      <main className={styles.main}>
-        <Hero />
-        <About />
-        <WorkExperience />
-        <MySkills />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+        <main className={styles.main}>
+          <Hero />
+          <About />
+          <WorkExperience />
+          <MySkills />
+          <Contact />
+        </main>
+        <Footer />
+        <ChatModalWrapper />
+      </div>
+    </ChatProvider>
   );
 }

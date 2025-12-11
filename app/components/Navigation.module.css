@@ -67,10 +67,6 @@
   border-bottom: none;
 }
 
-.mobileMenuItem:hover {
-  color: white;
-}
-
 @media (max-width: 768px) {
   .header {
     padding-top: 8px;

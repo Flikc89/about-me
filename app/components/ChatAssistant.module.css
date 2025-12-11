@@ -1,16 +1,60 @@
 .container {
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
 }
 
-.inputContainer {
-  width: 800px;
+.inputWrapper {
+  width: 100%;
   height: 56px;
+  padding: 1px;
+  border-radius: 8px;
+  background: linear-gradient(to right, white, var(--color-purple));
+  display: flex;
+  align-items: center;
+}
+
+.inputInner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-dark);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+}
+
+.input {
+  flex: 1;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: var(--font-hack), monospace;
+  font-size: 16px;
+  padding: 0;
+}
+
+.input::placeholder {
+  color: var(--color-gray);
+}
+
+.inputIconLeft {
+  display: none;
+}
+
+.inputIconRight {
+  width: 40px;
+  height: 32px;
+  flex-shrink: 0;
 }
 
 .questionsContainer {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top: 16px;
 }
 
 .questionBlock {
@@ -26,16 +70,14 @@
     padding: 0;
   }
 
-  .inputContainer {
-    width: 100%;
-    max-width: 100%;
+  .inputWrapper {
     height: 48px;
   }
 
   .questionsContainer {
     flex-direction: column;
     gap: 8px;
-    margin-top: 0;
+    margin-top: 12px;
   }
 
   .questionBlock {

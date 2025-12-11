@@ -28,7 +28,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Chat Assistant - positioned under photo */}
+        {/* Chat Assistant */}
         <div className={`absolute ${styles.chatAssistantContainer}`}>
           <ChatAssistant />
         </div>

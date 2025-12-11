@@ -40,6 +40,8 @@
   top: 568px; /* 36px (photo top) + 532px (photo height) */
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  max-width: 800px;
 }
 
 @media (max-width: 768px) {
@@ -93,5 +95,6 @@
     transform: none;
     margin-top: 20px;
     width: 100%;
+    max-width: 100%;
   }
 }

@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useRef } from 'react';
 import styles from './Contact.module.css';
-import { getGradientStyle, type MousePosition, type ElementRefs } from '@/lib/gradient';
+import { getGradientStyle, useGradientHover } from '@/lib/gradient';
 
 const PHONE = '+7 995 500-64-71';
 const EMAIL = 'flikc8668@gmail.com';
@@ -17,8 +16,12 @@ const SOCIAL_LINKS = {
 };
 
 export default function Contact() {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({});
-  const linkRefs = useRef<ElementRefs>({});
+  const {
+    mousePosition,
+    elementRefs: linkRefs,
+    handleMouseMove,
+    handleMouseLeave,
+  } = useGradientHover();
 
   const handleCopy = async (text: string) => {
     try {
@@ -34,32 +37,6 @@ export default function Contact() {
     window.open(`https://yandex.ru/maps/?text=${query}`, '_blank');
   };
 
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement>,
-    key: string
-  ) => {
-    const element = linkRefs.current[key];
-    if (!element) return;
-
-    const rect = element.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    setMousePosition((prev: MousePosition) => ({
-      ...prev,
-      [key]: { x, y },
-    }));
-  };
-
-  const handleMouseLeave = (key: string) => {
-    setMousePosition((prev: MousePosition) => {
-      const newPos = { ...prev };
-      delete newPos[key];
-      return newPos;
-    });
-  };
-
-
   return (
     <section id='contact' className={styles.section}>
       <h2 className={`section-heading ${styles.heading}`}>contact</h2>
@@ -73,7 +50,7 @@ export default function Contact() {
             onClick={() => handleCopy(PHONE)}
             onMouseMove={(e) => handleMouseMove(e, 'phone')}
             onMouseLeave={() => handleMouseLeave('phone')}
-            style={getGradientStyle('phone', mousePosition, linkRefs)}
+            style={getGradientStyle('phone', mousePosition, linkRefs, true)}
             title='Нажмите, чтобы скопировать'
           >
             {PHONE}
@@ -86,7 +63,7 @@ export default function Contact() {
             onClick={() => handleCopy(EMAIL)}
             onMouseMove={(e) => handleMouseMove(e, 'email')}
             onMouseLeave={() => handleMouseLeave('email')}
-            style={getGradientStyle('email', mousePosition, linkRefs)}
+            style={getGradientStyle('email', mousePosition, linkRefs, true)}
             title='Нажмите, чтобы скопировать'
           >
             {EMAIL}
@@ -103,7 +80,7 @@ export default function Contact() {
               className={`text-body ${styles.socialLink}`}
               onMouseMove={(e) => handleMouseMove(e, 'telegram')}
               onMouseLeave={() => handleMouseLeave('telegram')}
-              style={getGradientStyle('telegram', mousePosition, linkRefs, true)}
+              style={getGradientStyle('telegram', mousePosition, linkRefs)}
             >
               Telegram
               <img
@@ -122,7 +99,7 @@ export default function Contact() {
               className={`text-body ${styles.socialLink}`}
               onMouseMove={(e) => handleMouseMove(e, 'github')}
               onMouseLeave={() => handleMouseLeave('github')}
-              style={getGradientStyle('github', mousePosition, linkRefs, true)}
+              style={getGradientStyle('github', mousePosition, linkRefs)}
             >
               GitHub
               <img
@@ -141,7 +118,7 @@ export default function Contact() {
               className={`text-body ${styles.socialLink}`}
               onMouseMove={(e) => handleMouseMove(e, 'habr')}
               onMouseLeave={() => handleMouseLeave('habr')}
-              style={getGradientStyle('habr', mousePosition, linkRefs, true)}
+              style={getGradientStyle('habr', mousePosition, linkRefs)}
             >
               Хабр Карьера
               <img
@@ -162,7 +139,7 @@ export default function Contact() {
               onClick={handleLocationClick}
               onMouseMove={(e) => handleMouseMove(e, 'location')}
               onMouseLeave={() => handleMouseLeave('location')}
-              style={getGradientStyle('location', mousePosition, linkRefs, true)}
+              style={getGradientStyle('location', mousePosition, linkRefs)}
               title='Открыть в Яндекс Картах'
             >
               <div>{LOCATION}</div>

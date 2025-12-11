@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './MySkills.module.css';
+import { getGradientStyle, useGradientHover } from '@/lib/gradient';
 
 const SKILLS = [
   // Основные технологии - высший приоритет
@@ -68,20 +69,26 @@ const ROW_CONFIG = [10, 7, 4, 7, 6, 6, 1];
 
 export default function MySkills() {
   const [isMobile, setIsMobile] = useState(false);
+  const {
+    mousePosition,
+    elementRefs: skillRefs,
+    handleMouseMove,
+    handleMouseLeave,
+  } = useGradientHover();
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const skillsRows: string[][] = [];
-  
+
   if (isMobile) {
     // На мобильных просто одна строка со всеми навыками
     skillsRows.push(SKILLS);
@@ -100,13 +107,30 @@ export default function MySkills() {
       <div className={styles.skillsContainer}>
         {skillsRows.map((row, rowIndex) => (
           <div key={rowIndex} className={styles.skillsRow}>
-            {row.map((skill, index) => (
-              <div key={index} className={styles.skillBlock}>
-                <div className={styles.skillBlockInner}>
-                  <span className={styles.skillText}>[{skill}]</span>
+            {row.map((skill, index) => {
+              const skillKey = `skill-${rowIndex}-${index}`;
+              return (
+                <div key={index} className={styles.skillBlock}>
+                  <div className={styles.skillBlockInner}>
+                    <span
+                      ref={(el) => {
+                        skillRefs.current[skillKey] = el;
+                      }}
+                      className={styles.skillText}
+                      onMouseMove={(e) => handleMouseMove(e, skillKey)}
+                      onMouseLeave={() => handleMouseLeave(skillKey)}
+                      style={getGradientStyle(
+                        skillKey,
+                        mousePosition,
+                        skillRefs
+                      )}
+                    >
+                      [{skill}]
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ))}
       </div>

@@ -24,7 +24,7 @@
 .contactsContent::before {
   content: '';
   position: absolute;
-  left: -260px;
+  left: -240px;
   top: 50px;
   width: 40px;
   height: calc(100% - 120px);

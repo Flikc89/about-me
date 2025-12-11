@@ -75,13 +75,17 @@
   }
 
   .statsContainer {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     padding: 0 16px;
+    gap: 12px;
   }
 
   .statCard {
-    width: 100%;
-    max-width: 290px;
+    width: calc(50% - 6px);
+    max-width: none;
+    min-width: 0;
   }
 }

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import styles from './Contact.module.css';
+import { getGradientStyle, type MousePosition, type ElementRefs } from '@/lib/gradient';
 
 const PHONE = '+7 995 500-64-71';
 const EMAIL = 'flikc8668@gmail.com';
@@ -16,12 +17,8 @@ const SOCIAL_LINKS = {
 };
 
 export default function Contact() {
-  const [mousePosition, setMousePosition] = useState<{
-    [key: string]: { x: number; y: number };
-  }>({});
-  const linkRefs = useRef<{
-    [key: string]: HTMLAnchorElement | HTMLDivElement | null;
-  }>({});
+  const [mousePosition, setMousePosition] = useState<MousePosition>({});
+  const linkRefs = useRef<ElementRefs>({});
 
   const handleCopy = async (text: string) => {
     try {
@@ -48,73 +45,20 @@ export default function Contact() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    setMousePosition((prev) => ({
+    setMousePosition((prev: MousePosition) => ({
       ...prev,
       [key]: { x, y },
     }));
   };
 
   const handleMouseLeave = (key: string) => {
-    setMousePosition((prev) => {
+    setMousePosition((prev: MousePosition) => {
       const newPos = { ...prev };
       delete newPos[key];
       return newPos;
     });
   };
 
-  const getGradientStyle = (key: string, isSocial: boolean = false) => {
-    const pos = mousePosition[key];
-    if (!pos) {
-      return {
-        WebkitBackgroundClip: 'initial',
-        WebkitTextFillColor: 'initial',
-        backgroundClip: 'initial',
-      };
-    }
-
-    const element = linkRefs.current[key];
-    if (!element) {
-      return {
-        WebkitBackgroundClip: 'initial',
-        WebkitTextFillColor: 'initial',
-        backgroundClip: 'initial',
-      };
-    }
-
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    // Вычисляем расстояние от центра до курсора
-    const distance = Math.sqrt(
-      Math.pow(pos.x - centerX, 2) + Math.pow(pos.y - centerY, 2)
-    );
-    const maxDistance = Math.sqrt(
-      Math.pow(rect.width / 2, 2) + Math.pow(rect.height / 2, 2)
-    );
-
-    // Нормализуем позицию курсора в процентах от размера элемента
-    // Центр элемента = 50% 50%
-    const normalizedX = (pos.x / rect.width) * 100;
-    const normalizedY = (pos.y / rect.height) * 100;
-
-    // Создаем радиальный градиент от позиции курсора
-    // Чем ближе к центру, тем больше пурпурного в центре
-    const gradientSize = Math.min(150, 100 + (distance / maxDistance) * 50);
-
-    // Для соц сетей используем другой градиент с меньшей пурпурной областью
-    const gradientString = isSocial
-      ? `radial-gradient(circle ${gradientSize}px at ${normalizedX}% ${normalizedY}%, var(--color-purple) 0%, white 50%, white 100%)`
-      : `radial-gradient(circle ${gradientSize}px at ${normalizedX}% ${normalizedY}%, var(--color-purple) 0%, var(--color-purple) 50%, white 100%)`;
-
-    return {
-      backgroundImage: gradientString,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      backgroundClip: 'text',
-      color: 'transparent',
-    };
-  };
 
   return (
     <section id='contact' className={styles.section}>
@@ -129,7 +73,7 @@ export default function Contact() {
             onClick={() => handleCopy(PHONE)}
             onMouseMove={(e) => handleMouseMove(e, 'phone')}
             onMouseLeave={() => handleMouseLeave('phone')}
-            style={getGradientStyle('phone')}
+            style={getGradientStyle('phone', mousePosition, linkRefs)}
             title='Нажмите, чтобы скопировать'
           >
             {PHONE}
@@ -142,7 +86,7 @@ export default function Contact() {
             onClick={() => handleCopy(EMAIL)}
             onMouseMove={(e) => handleMouseMove(e, 'email')}
             onMouseLeave={() => handleMouseLeave('email')}
-            style={getGradientStyle('email')}
+            style={getGradientStyle('email', mousePosition, linkRefs)}
             title='Нажмите, чтобы скопировать'
           >
             {EMAIL}
@@ -159,7 +103,7 @@ export default function Contact() {
               className={`text-body ${styles.socialLink}`}
               onMouseMove={(e) => handleMouseMove(e, 'telegram')}
               onMouseLeave={() => handleMouseLeave('telegram')}
-              style={getGradientStyle('telegram', true)}
+              style={getGradientStyle('telegram', mousePosition, linkRefs, true)}
             >
               Telegram
               <img
@@ -178,7 +122,7 @@ export default function Contact() {
               className={`text-body ${styles.socialLink}`}
               onMouseMove={(e) => handleMouseMove(e, 'github')}
               onMouseLeave={() => handleMouseLeave('github')}
-              style={getGradientStyle('github', true)}
+              style={getGradientStyle('github', mousePosition, linkRefs, true)}
             >
               GitHub
               <img
@@ -197,7 +141,7 @@ export default function Contact() {
               className={`text-body ${styles.socialLink}`}
               onMouseMove={(e) => handleMouseMove(e, 'habr')}
               onMouseLeave={() => handleMouseLeave('habr')}
-              style={getGradientStyle('habr', true)}
+              style={getGradientStyle('habr', mousePosition, linkRefs, true)}
             >
               Хабр Карьера
               <img
@@ -218,7 +162,7 @@ export default function Contact() {
               onClick={handleLocationClick}
               onMouseMove={(e) => handleMouseMove(e, 'location')}
               onMouseLeave={() => handleMouseLeave('location')}
-              style={getGradientStyle('location', true)}
+              style={getGradientStyle('location', mousePosition, linkRefs, true)}
               title='Открыть в Яндекс Картах'
             >
               <div>{LOCATION}</div>

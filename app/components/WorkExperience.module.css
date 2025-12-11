@@ -138,4 +138,8 @@
   .descriptionContainer {
     padding: 0 12px 12px 40px;
   }
+
+    .listContainer {
+        padding: 0 16px;
+    }
 }

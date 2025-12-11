@@ -2,7 +2,7 @@ import styles from './About.module.css';
 
 const STATS = [
   { title: '10+', description: 'Лет опыта' },
-  { title: '50+', description: 'Завершенных проектов' },
+  { title: '50+', description: 'Проектов' },
   { title: '6+', description: 'Компаний' },
   { title: '100%', description: 'Вовлеченности' },
 ];

@@ -36,20 +36,17 @@ export default function Navigation() {
       >
         <div
           className={`mx-auto flex h-12 items-center justify-between ${styles.navContainer}`}
-          style={{ maxWidth: 'var(--max-width)' }}
         >
           {/* Имя слева */}
           <div
-            className='text-body font-bold uppercase tracking-[0.16em] text-xs md:text-base'
-            style={{ color: 'var(--color-gray)' }}
+            className={`text-body font-bold uppercase tracking-[0.16em] text-xs md:text-base ${styles.navText}`}
           >
             Denis Lobanov
           </div>
 
           {/* Навигация для десктопа */}
           <nav
-            className={`text-body items-center gap-4 md:gap-10 font-normal uppercase tracking-[0.16em] text-xs md:text-base ${styles.desktopNav}`}
-            style={{ color: 'var(--color-gray)' }}
+            className={`text-body items-center gap-4 md:gap-10 font-normal uppercase tracking-[0.16em] text-xs md:text-base ${styles.desktopNav} ${styles.navText}`}
           >
             <a
               href='#about'
@@ -101,8 +98,7 @@ export default function Navigation() {
         <>
           <div className={styles.mobileMenuOverlay} onClick={toggleMenu} />
           <nav
-            className={`text-body font-normal uppercase tracking-[0.16em] ${styles.mobileMenu}`}
-            style={{ color: 'var(--color-gray)' }}
+            className={`text-body font-normal uppercase tracking-[0.16em] ${styles.mobileMenu} ${styles.navText}`}
           >
             <a
               href='#about'

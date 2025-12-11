@@ -26,8 +26,6 @@
   border: none;
   outline: none;
   color: white;
-  font-family: var(--font-hack), monospace;
-  font-size: 16px;
   padding: 0;
 }
 

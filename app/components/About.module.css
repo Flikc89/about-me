@@ -48,18 +48,10 @@
 
 .statTitle {
   color: var(--color-purple);
-  font-family: var(--font-hack), monospace;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 44px;
-  text-align: center;
+  margin-top: 4px;
 }
 
 .statDescription {
-  font-family: var(--font-hack), monospace;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
   text-align: center;
   margin-top: 4px;
 }

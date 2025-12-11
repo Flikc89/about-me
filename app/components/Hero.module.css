@@ -59,7 +59,7 @@
     min-height: 500px;
     flex-direction: column;
     align-items: center;
-    padding: 20px 16px;
+    padding: 20px 0;
     position: relative;
   }
 

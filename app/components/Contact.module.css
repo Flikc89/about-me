@@ -115,8 +115,8 @@
   }
 
   .contactsContent {
-    width: 100%;
-    padding: 0 16px;
+    width: fit-content;
+    padding: 0;
   }
 
   .contactsContent::before,

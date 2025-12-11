@@ -14,7 +14,7 @@
 }
 
 .contactsContent {
-  width: 400px;
+  width: 420px;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -24,13 +24,13 @@
 .contactsContent::before {
   content: '';
   position: absolute;
-  left: -240px;
+  left: -260px;
   top: 50px;
   width: 40px;
   height: calc(100% - 120px);
   background-image: url(/contact-border.svg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: left;
   pointer-events: none;
 }
 
@@ -43,7 +43,7 @@
   height: calc(100% - 120px);
   background-image: url(/contact-border.svg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: right;
   transform: rotate(180deg);
   pointer-events: none;
 }

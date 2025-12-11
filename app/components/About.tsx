@@ -46,7 +46,9 @@ export default function About() {
           return (
             <div key={index} className={`${styles.statCard} ${gradientClass}`}>
               <div className={styles.statCardInner}>
-                <div className={styles.statTitle}>{stat.title}</div>
+                <div className={`card-heading ${styles.statTitle}`}>
+                  {stat.title}
+                </div>
                 <div
                   ref={(el) => {
                     elementRefs.current[statDescriptionKey] = el;

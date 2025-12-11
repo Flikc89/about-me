@@ -36,4 +36,3 @@ export async function sendMessage(
     throw new Error('Не удалось отправить сообщение. Попробуйте позже.');
   }
 }
-

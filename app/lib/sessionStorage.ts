@@ -17,7 +17,9 @@ export function getOrCreateSessionId(): string {
   return sessionId;
 }
 
-export function saveChatMessages(messages: Array<{ id: string; text: string; isUser: boolean }>) {
+export function saveChatMessages(
+  messages: Array<{ id: string; text: string; isUser: boolean }>
+) {
   if (typeof window === 'undefined') {
     return;
   }
@@ -29,7 +31,11 @@ export function saveChatMessages(messages: Array<{ id: string; text: string; isU
   }
 }
 
-export function loadChatMessages(): Array<{ id: string; text: string; isUser: boolean }> {
+export function loadChatMessages(): Array<{
+  id: string;
+  text: string;
+  isUser: boolean;
+}> {
   if (typeof window === 'undefined') {
     return [];
   }
@@ -53,4 +59,3 @@ export function clearChatMessages() {
 
   localStorage.removeItem(CHAT_MESSAGES_KEY);
 }
-

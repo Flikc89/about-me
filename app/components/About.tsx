@@ -11,12 +11,8 @@ const STATS = [
 ];
 
 export default function About() {
-  const {
-    mousePosition,
-    elementRefs,
-    handleMouseMove,
-    handleMouseLeave,
-  } = useGradientHover();
+  const { mousePosition, elementRefs, handleMouseMove, handleMouseLeave } =
+    useGradientHover();
 
   return (
     <section id='about' className={styles.section}>
@@ -28,10 +24,16 @@ export default function About() {
         className={`text-body text-white ${styles.description}`}
         onMouseMove={(e) => handleMouseMove(e, 'description')}
         onMouseLeave={() => handleMouseLeave('description')}
-        style={getGradientStyle('description', mousePosition, elementRefs, true)}
+        style={getGradientStyle(
+          'description',
+          mousePosition,
+          elementRefs,
+          true
+        )}
       >
-        Senior/Lead фронтендер с большим опытом в React, JavaScript и создании сложных интерфейсов. 
-        Умею проектировать архитектуру, ускорять продукты и превращать запутанные процессы в удобные инструменты. 
+        Senior/Lead фронтендер с большим опытом в React, JavaScript и создании
+        сложных интерфейсов. Умею проектировать архитектуру, ускорять продукты и
+        превращать запутанные процессы в удобные инструменты.
       </div>
       <div className={`flex ${styles.statsContainer}`}>
         {STATS.map((stat, index) => {
